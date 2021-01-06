@@ -1,0 +1,139 @@
+#:import MapView kivy_garden.mapview
+
+ScreenManager:
+    LoginScreen:
+    RegisterScreen:
+    HomeScreen:
+        name:"homescreen"
+        id:homescreen
+
+    MapScreen:
+        name:"mapscreen"
+        id:map
+
+
+<RegisterScreen>:
+    name:"register_screen"
+    FloatLayout:
+        MDLabel:
+            text:"Register"
+            pos_hint:{"x":0.25,"y":0.3}
+            theme_text_color:"Primary"
+            font_style: "H1"
+        MDTextField:
+            id: username
+            hint_text:"Username"
+            mode:"rectangle"
+            pos_hint:{"x":0.3,"y":0.6}
+            size_hint_x:None
+            width:250
+
+        MDTextField:
+            id: email
+            hint_text:"Email"
+            mode:"rectangle"
+            pos_hint:{"x":0.3,"y":0.5}
+            size_hint_x:None
+            width:250
+        MDTextField:
+            id: password
+            hint_text:"Password"
+            mode:"rectangle"
+            pos_hint:{"x":0.3,"y":0.4}
+            size_hint_x:None
+            width:250
+
+        MDFillRoundFlatButton:
+            text:"Register"
+            pos_hint:{"x":0.6,"y":0.3}
+            on_release: app.my_firebase.signup(root,username.text, email.text,password.text)
+
+        MDFillRoundFlatButton:
+            text:"Login"
+            pos_hint:{"x":0.28,"y":0.3}
+            on_release :app.change_screen("login_screen")
+
+        Label:
+            id:error_msg
+            pos_hint:{"top":0.2,"right":0.85}
+            color:(1,0,0)
+            size_hint:.8,.1
+
+
+
+
+<LoginScreen>:
+    name:"login_screen"
+    FloatLayout:
+        MDLabel:
+            text:"Login"
+            pos_hint:{"x":0.32,"y":0.2}
+            theme_text_color:"Primary"
+            font_style: "H1"
+        MDTextField:
+            id: email
+            hint_text:"Email"
+            mode:"rectangle"
+            pos_hint:{"x":0.3,"y":0.5}
+            size_hint_x:None
+            width:250
+        MDTextField:
+            id: password
+            hint_text:"Password"
+            mode:"rectangle"
+            pos_hint:{"x":0.3,"y":0.4}
+            size_hint_x:None
+            width:250
+
+        MDFillRoundFlatButton:
+            text:"Login"
+            pos_hint:{"x":0.6,"y":0.3}
+            on_release : app.my_firebase.sign_in_existing_user(root,email.text,password.text)
+
+        MDFillRoundFlatButton:
+            text:"Register"
+            pos_hint:{"x":0.28,"y":0.3}
+            on_release : app.change_screen("register_screen")
+        Label:
+            id:error_msg_login
+            #pos_hint:{"top":0.2,"right":0.85}
+            color:(1,0,0)
+            size_hint:.8,.1
+
+
+<HomeScreen>:
+    FloatLayout:
+        id:homescreen_floatlayout
+        MDLabel:
+            id: homescreen_title
+            pos_hint:{"x":0.35,"y":0.8}
+            size_hint_x:None
+            size_hint_y:0.1
+            font_style:"H3"
+            width:500
+
+        MDLabel:
+            text:"Phones"
+            pos_hint:{"x":0.38,"y":0.7}
+            size_hint_x:None
+            size_hint_y:0.1
+
+        GridLayout:
+            id:devices
+            cols:1
+            pos_hint:{"x":0.3,"y":0.5}
+            size_hint_x:None
+            size_hint_y:0.2
+            width:300
+
+<MapScreen>:
+    MapView:
+        id:mapview
+        lat: 50.6394
+        lon: 3.057
+        zoom: 8
+
+
+
+
+
