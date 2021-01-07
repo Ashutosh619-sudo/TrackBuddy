@@ -35,9 +35,6 @@ class MainApp(MDApp):
         self.device_name = platform.node()
         self.my_firebase = MyFireBase()
         self.theme_cls.primary_palette = "Purple"
-        root = Builder.load_file("main.kv")
-        root.size_hint = (1.0, 1.0)
-        return root
 
     def got_json(self, req, result):
         data = result
@@ -71,5 +68,6 @@ class MainApp(MDApp):
 
 
 
+if  __name__ == "__main__":
+    MainApp().run()
 
-MainApp().run()
